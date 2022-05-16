@@ -45,7 +45,8 @@ namespace DemoApi.Controllers
                 SerialNumber = "12345"
             };
             context.Devices.Add(device);
-            return Created("Search/Devices/{macAddress}", context.SaveChanges());
+            context.SaveChanges();
+            return Created($"Search/Devices/{macAddress}", device);
         }
 
         [HttpPut("Update/{macAddress}/{statusID}")]
@@ -63,7 +64,11 @@ namespace DemoApi.Controllers
         {
             var device = context.Devices.Where(d => d.OperatorID == 100018 && d.MACAddress == macAddress).FirstOrDefault();
             context.Remove(device);
-            return Ok(context.SaveChanges());
+            if (device != null)
+                return Ok(context.SaveChanges());
+            else
+                return BadRequest();
+            
         }
     }
 }
