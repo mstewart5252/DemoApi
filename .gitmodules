@@ -1,0 +1,3 @@
+[submodule "Hospitality-Data"]
+	path = Hospitality-Data
+	url = https://github.com/Tangerineglobal/Hospitality-Data.git
